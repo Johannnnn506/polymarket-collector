@@ -1,0 +1,46 @@
+# Polymarket Cycle Collector Configuration
+# This configuration is for the automated multi-market collector
+
+# Manager settings for cycle collector
+manager:
+  # How often to scan for new markets
+  scan_interval: 30s
+
+  # Grace period after market ends before closing session
+  # This allows capturing final settlement data
+  grace_period: 60s
+
+  # Series to track
+  # Each series represents a recurring market type
+  series:
+    # ETH markets
+    - slug: eth-up-or-down-15m
+      enabled: true
+    - slug: eth-up-or-down-hourly
+      enabled: true
+    - slug: eth-up-or-down-daily
+      enabled: true
+
+    # BTC markets
+    - slug: btc-up-or-down-15m
+      enabled: true
+    - slug: btc-up-or-down-hourly
+      enabled: true
+    - slug: btc-up-or-down-daily
+      enabled: true
+
+# Storage settings
+storage:
+  type: file
+  output_dir: data
+
+# WebSocket settings (used by individual sessions)
+websocket:
+  initial_backoff: 1s
+  max_backoff: 30s
+  backoff_factor: 2.0
+
+# Logging settings
+logging:
+  level: info
+  format: text

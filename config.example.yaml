@@ -1,0 +1,45 @@
+# Polymarket L2 Data Collector Configuration
+
+# Market discovery settings
+discovery:
+  # How often to refresh the market list
+  refresh_interval: 5m
+
+  # Tag slugs to filter events (empty = all active markets)
+  # Example: ["bitcoin", "ethereum"]
+  tags: []
+
+  # Only include active markets
+  active_only: true
+
+  # Maximum number of markets to track
+  max_markets: 100
+
+# Storage settings
+storage:
+  # Storage type: "file" or "none"
+  type: file
+
+  # Output directory for file storage
+  output_dir: data
+
+  # File rotation interval
+  rotation_interval: 1h
+
+# WebSocket settings
+websocket:
+  # Custom WebSocket URL (leave empty for default)
+  url: ""
+
+  # Reconnection settings
+  initial_backoff: 1s
+  max_backoff: 30s
+  backoff_factor: 2.0
+
+# Logging settings
+logging:
+  # Log level: debug, info, warn, error
+  level: info
+
+  # Log format: text or json
+  format: text
