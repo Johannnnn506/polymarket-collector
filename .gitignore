@@ -11,7 +11,7 @@ __pycache__/
 # Go
 bin/
 *.exe
-cycle-collector
+/cycle-collector
 
 # Data
 data/
