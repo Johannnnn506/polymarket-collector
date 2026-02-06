@@ -214,13 +214,15 @@ func (c *Client) FetchActiveMarketsForSeries(ctx context.Context, seriesSlug str
 		fullEvent := events[0]
 
 		// Determine if trading has started
+		// Note: Actual trading starts before the official startTime, so we start collecting 5 minutes early
 		var tradingStarted bool
+		earlyStart := 5 * time.Minute
 		if !fullEvent.StartTime.IsZero() {
-			// Use explicit startTime if available
-			tradingStarted = !fullEvent.StartTime.After(now)
+			// Use explicit startTime minus early start buffer
+			tradingStarted = !fullEvent.StartTime.Add(-earlyStart).After(now)
 		} else {
 			// Estimate: trading starts tradingWindow before endDate
-			estimatedStart := fullEvent.EndDate.Add(-tradingWindow)
+			estimatedStart := fullEvent.EndDate.Add(-tradingWindow).Add(-earlyStart)
 			tradingStarted = !estimatedStart.After(now)
 		}
 
